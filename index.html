@@ -301,6 +301,34 @@ h1 {
     });
 });
 </script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // ... autres scripts ...
+
+        const participantCount = document.getElementById("participantCount");
+        const totalPrice = document.getElementById("totalPrice");
+        const calculateButton = document.getElementById("calculateButton");
+
+        calculateButton.addEventListener("click", function() {
+            let nbParticipants = parseInt(participantCount.value);
+            let total = 0;
+
+            if (nbParticipants >= 10 && nbParticipants <= 20) {
+                total = 39.90 * nbParticipants;
+            } else if (nbParticipants > 20 && nbParticipants <= 30) {
+                total = 24.90 * nbParticipants;
+            } else if (nbParticipants > 30 && nbParticipants <= 40) {
+                total = 19.90 * nbParticipants;
+            } else if (nbParticipants > 40 && nbParticipants <= 50) {
+                total = 14.90 * nbParticipants;
+            }
+
+            total -= 189.90;
+
+            totalPrice.textContent = total.toFixed(2) + "€";
+        });
+    });
+</script>
 
 </body>
 </html>
