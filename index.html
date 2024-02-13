@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ v<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -229,14 +229,6 @@ h1 {
         const playerExtension = document.getElementById("playerExtension");
         const totalPrice = document.getElementById("totalPrice");
         const calculateButton = document.getElementById("calculateButton");
-
-        animator.addEventListener("change", function() {
-            if (animator.value === "250") {
-                distanceField.style.display = "block";
-            } else {
-                distanceField.style.display = "none";
-            }
-        });
 
         calculateButton.addEventListener("click", function() {
             let total = parseFloat(gameType.value) + parseFloat(animator.value);
