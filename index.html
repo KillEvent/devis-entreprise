@@ -1,305 +1,248 @@
- v<!DOCTYPE html>
+
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulaire de choix</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-        }
-
-        #choiceForm {
-            background-color: #fff;
-            max-width: 500px;
-            margin: 50px auto;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        div {
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        select, button, input[type="number"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-        }
- select, button, input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-         select, button, input[type="email"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-
-         select, button, input[type="textaera"] {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-        button {
-            background-color: #007BFF;
-            color: #fff;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        p {
-    font-size: 10px;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 80%; /* ou une autre valeur pour définir la largeur maximale du paragraphe */
-}
-
-h1 {
-    text-align: center;
-    font-size: 20px;
-}
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        input[type="checkbox"] {
-            margin-right: 10px;
-        }
-
-     .custom-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #000; /* couleur de fond noire */
-    color: #fff; /* texte blanc */
-    text-decoration: none; /* supprimer le soulignement */
-    border-radius: 5px; /* coins arrondis */
-    font-weight: bold; /* texte en gras */
-    transition: background-color 0.3s; /* transition douce pour le survol */
-    margin-top: 20px; /* espace au-dessus du bouton */
-}
-
-.custom-button:hover {
-    background-color: #DA4F40; /* couleur de fond un peu plus claire au survol pour un effet subtil */
-}
-
-.custom-button:hover {
-    background-color: #0056b3; /* couleur de fond un peu plus foncée au survol */
-}
-
-
-        abbr {
-    color: #fff; /* couleur blanche pour le point d'interrogation */
-    background-color: #007BFF; /* couleur de fond bleue */
-    cursor: help;
-    text-decoration: none;
-    font-weight: bold;
-    position: absolute;
-    right: -25px; /* ajustement pour le positionnement */
-    top: 50%;
-    transform: translateY(-50%);
-    border-radius: 50%; /* rend le fond circulaire */
-    width: 20px; /* largeur du cercle */
-    height: 20px; /* hauteur du cercle */
-    text-align: center; /* centre le point d'interrogation dans le cercle */
-    line-height: 20px; /* aligne verticalement le point d'interrogation dans le cercle */
-             top: 70%;
-             cursor: pointer;
-}
-
-@media (max-width: 600px) {
-    abbr {
-        right: -30px;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Demande de devis – Kill Event</title>
+  <style>
+    :root{
+      --ke-bg:#0b0b0b;         /* noir profond */
+      --ke-surface:#121212;    /* carte */
+      --ke-text:#ffffff;
+      --ke-muted:#bcbcbc;
+      --ke-gold:#d4af37;       /* or */
+      --ke-red:#da4f40;        /* rouge */
+      --ke-red-dark:#b5382d;
+      --ke-border:#242424;
+      --radius:14px;
     }
-}
 
-@media (max-width: 600px) {
-    #choiceForm {
-        /* ... autres styles ... */
-        box-sizing: border-box;
-        padding-left: 15%;
-        padding-right: 15%;
+    *{box-sizing:border-box}
+    body{
+      margin:0; background:var(--ke-bg); color:var(--ke-text);
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif;
+      line-height:1.5;
     }
-}
 
+    .wrap{
+      max-width: 980px;
+      margin: clamp(24px,5vw,56px) auto;
+      padding: 0 clamp(16px,3vw,24px);
+    }
 
+    header{
+      text-align:center; margin-bottom: 22px;
+    }
+    header .kicker{
+      text-transform:uppercase; letter-spacing:.14em; color:var(--ke-gold);
+      font-size:.9rem; opacity:.95;
+    }
+    header h1{
+      margin:.25rem 0 0; font-size: clamp(26px,4.2vw,38px);
+      font-family: "Playfair Display", Georgia, serif;
+      font-weight:700;
+    }
+    header p{color:var(--ke-muted); margin:.35rem 0 0}
 
+    form#choiceForm{
+      background: var(--ke-surface);
+      border:1px solid var(--ke-border);
+      border-radius: var(--radius);
+      padding: clamp(18px,3.5vw,28px);
+      box-shadow: 0 12px 38px rgba(0,0,0,.35);
+    }
 
-    </style>
+    /* layout 2 colonnes */
+    .grid{
+      display:grid; gap: clamp(16px,2.5vw,22px);
+      grid-template-columns: 1fr 1fr;
+    }
+    .grid-1{ grid-column: span 1; }
+    .grid-2{ grid-column: span 2; }
+
+    @media (max-width: 760px){
+      .grid{ grid-template-columns: 1fr; }
+      .grid-1,.grid-2{ grid-column: auto; }
+    }
+
+    label{
+      display:flex; align-items:center; gap:8px;
+      margin-bottom:8px; font-weight:600;
+    }
+    .help-badge{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:20px; height:20px; border-radius:50%;
+      background: var(--ke-red); color:#fff; font-size:.8rem;
+      cursor:pointer;
+    }
+
+    input[type="text"], input[type="email"], input[type="tel"], input[type="number"],
+    select, textarea{
+      width:100%; border:1px solid var(--ke-border); border-radius:10px;
+      background:#0f0f0f; color: var(--ke-text);
+      padding:12px 14px; font-size:16px; outline:none;
+      transition: box-shadow .2s, border-color .2s;
+    }
+    textarea{ min-height: 140px; resize: vertical; }
+
+    input:focus, select:focus, textarea:focus{
+      border-color: var(--ke-red);
+      box-shadow: 0 0 0 3px rgba(218,79,64,.18);
+    }
+
+    .hint{ color: var(--ke-muted); font-size:.9rem; margin-top:6px; }
+
+    .actions{
+      display:flex; gap:12px; flex-wrap:wrap; align-items:center; margin-top:10px;
+    }
+    .btn{
+      appearance:none; border:none; cursor:pointer;
+      padding:12px 22px; border-radius:999px; font-weight:800;
+      color:#fff; background: linear-gradient(180deg,var(--ke-red),var(--ke-red-dark));
+      box-shadow: 0 10px 24px rgba(218,79,64,.35);
+    }
+    .btn:hover{ transform: translateY(-1px); }
+    .btn-outline{
+      background: transparent; border:1px solid var(--ke-gold); color:var(--ke-gold);
+    }
+    .legal{
+      text-align:center; color:var(--ke-muted); font-size:.85rem; margin-top:10px;
+    }
+
+    a.inline{ color:var(--ke-gold); text-decoration:none; }
+    a.inline:hover{ text-decoration:underline; }
+  </style>
 </head>
 <body>
 
-<form id="choiceForm" action="https://formspree.io/f/xbjvaqle" method="POST">
-    <div>
-    <label for="firstName" >Prénom NOM* :</label>
-    <input type="text" id="firstName" name="firstName" required>
-</div>
+  <div class="wrap">
+    <header>
+      <div class="kicker">Nous contacter</div>
+      <h1>Demande de devis – Kill Event</h1>
+      <p>Une question, une intrigue, un partenariat ? Réponse sous 24&nbsp;h ouvrées.</p>
+    </header>
 
-<div>
-    <label for="companyName" >Nom de l'entreprise :</label>
-    <input type="text" id="companyName" name="companyName">
-</div>
+    <!-- ACTION Formspree conservée -->
+    <form id="choiceForm" action="https://formspree.io/f/xbjvaqle" method="POST">
+      <div class="grid">
+        <!-- Identité -->
+        <div class="grid-1">
+          <label for="firstName">Prénom NOM *</label>
+          <input type="text" id="firstName" name="firstName" required />
+        </div>
 
-<div>
-    <label for="email" >Adresse e-mail* :</label>
-    <input type="email" id="email" name="email" required>
-</div>
-<div>
-    <label for="telephone" >Téléphone:</label>
-    <input type="text" id="téléphone" name="téléphone">
-</div>
- 
-     <div>
-    <label for="autre" >Type d'évènement (séminaire, team building, rallye, fête entre particulier etc...)</label>
-    <input type="text" id="typevenement" name="typeevenement" required>
-</div>
-    
-<div>
-    <label for="eventAddress">Adresse de l'évènement :</label>
-    <input type="text" id="eventAddress" name="eventAddress">
-</div>
+        <div class="grid-1">
+          <label for="companyName">Entreprise (optionnel)</label>
+          <input type="text" id="companyName" name="companyName" />
+        </div>
 
- <div>
-    <label for="autre" >Date et heure de l'évènement</label>
-    <input type="text" id="dateheure" name="dateheureevent" required>
-</div>
-    
+        <div class="grid-1">
+          <label for="email">Adresse e-mail *</label>
+          <input type="email" id="email" name="email" required />
+        </div>
 
-<div>
-    <label for="participantCount">Nombre de participants : (à partir de 51 participants, nous faisons deux murder party)</label>
-    <input type="number" id="participantCount" name="participantCount">
-</div>
-    
+        <div class="grid-1">
+          <label for="telephone">Téléphone</label>
+          <input type="tel" id="telephone" name="telephone" />
+        </div>
 
-    <div>
-        <label for="scenario">Scénario choisi :</label>
-        <select id="scenario" name="scenario">
-            <option value="transylvanie">Transylvanie</option>
-            <option value="conte de fée">Conte de fée</option>
-            <option value="médiéval">Médiéval</option>
-          <option value="lasvegas">Casino - Las Vegas</option>
-        </select>
-        <abbr title="Choisissez le scénario souhaité. Si vous souhaitez une offre sur mesure, veuillez nous contacter au 06 43 89 63 41 ou par mail à info@kill-event.com.">?</abbr>
-    </div>
+        <!-- Scénario -->
+        <div class="grid-1">
+          <label for="scenario">
+            Scénario choisi
+            <span class="help-badge" title="Choisissez votre univers. Pour une offre sur-mesure : 06 43 89 63 41 ou info@kill-event.com">?</span>
+          </label>
+          <select id="scenario" name="scenario">
+            <option value="Meurtre à Minuit">Meurtre à Minuit</option>
+            <option value="Pari Mortel à Végas">Pari Mortel à Végas</option>
+            <option value="Mystère au Manoir">Mystère au Manoir</option>
+            <option value="Terreur en Transylvanie">Terreur en Transylvanie</option>
+            <option value="Cirque de l'Horreur">Cirque de l'Horreur</option>
+            <option value="Meurtre au Royaume">Meurtre au Royaume</option>
+            <option value="Meurtre à Tribord">Meurtre à Tribord</option>
+            <option value="Noces Macabre à la Cour">Noces Macabre à la Cour</option>
+            <option value="Bal des Sorciers">Bal des Sorciers</option>
+            <option value="Danse Macabre à la Cour">Danse Macabre à la Cour</option>
+          </select>
+        </div>
 
-    <div id="distanceField">
-        <label for="distance">À quelle distance votre évènement se trouvera de la ville la plus proche parmi celles ci - Montpellier / Nice / Marseille / Lyon ? (en km)</label>
-        <input type="number" id="distance" value="0" name="distance">
-        <abbr title="Veuillez préciser la distance en kilomètres entre votre événement et la ville la plus proche. Notez que les frais de déplacement de l'animateur s'élèvent à 0,50 centimes par kilomètre, couvrant à la fois l'aller et le retour, avec une réduction de 100km (pour l'aller, et pour le retour).">?</abbr>
-    </div>
+        <div class="grid-1">
+          <label for="typevenement">Type d’évènement *</label>
+          <input type="text" id="typevenement" name="typeevenement" placeholder="Séminaire, team building, rallye, particulier…" required />
+        </div>
 
-   <div>
-    <label for="autre" >Dans quel type de lieu se déroulera l'évènement , château, parc, local etc...? (vérifier si le branchement d'une enceinte est possible)</label>
-    <input type="text" id="lieu" name="lieu" required>
-</div>
+        <!-- Infos événement -->
+        <div class="grid-1">
+          <label for="eventAddress">Adresse de l’évènement</label>
+          <input type="text" id="eventAddress" name="eventAddress" />
+        </div>
 
-   <div>
-    <label for="autre" >Parlez nous de votre projet</label>
-    <input type="text" id="parleznous" name="parleznous" required>
-</div>
-    
-<button type="submit">Envoyer la demande de devis</button>
- <p>TVA non applicable, article 293B du CGI</p>
-    
-    <a href="https://kill-event.com/collections/all" class="custom-button" target="_blank">Voir les scénarios</a>
+        <div class="grid-1">
+          <label for="dateheure">Date et heure *</label>
+          <input type="text" id="dateheure" name="dateheureevent" placeholder="Ex : Samedi 14/12 – 19h30" required />
+        </div>
 
-</form>
+        <div class="grid-2">
+          <label for="participantCount">
+            Nombre de participants
+            <span class="help-badge" title="À partir de 51 participants, nous organisons deux murder parties en parallèle.">?</span>
+          </label>
+          <input type="number" id="participantCount" name="participantCount" min="1" />
+        </div>
 
-  <a href="https://killevent.github.io/calculateurprix/" target="_blank">
-        <button>Visiter le Calculateur de Prix</button>
-    </a>
+        <div class="grid-2">
+          <label for="distance">
+            Distance (km) depuis une ville proche (Montpellier / Nice / Marseille / Lyon)
+            <span class="help-badge" title="Frais de déplacement de l'animateur : 0,50 € / km, aller + retour, avec une franchise de 100 km (aller) et 100 km (retour).">?</span>
+          </label>
+          <input type="number" id="distance" name="distance" value="0" min="0" />
+        </div>
 
+        <div class="grid-2">
+          <label for="lieu">Type de lieu *</label>
+          <input type="text" id="lieu" name="lieu" placeholder="Château, parc, salle, domicile… (prise pour enceinte ?)" required />
+        </div>
 
+        <!-- Adresse de facturation -->
+        <div class="grid-2">
+          <label for="billing">
+            Adresse de facturation
+            <span class="help-badge" title="Indiquez l’entité à facturer (entreprise / association / mairie / particulier) et l’adresse complète.">?</span>
+          </label>
+          <textarea id="billing" name="billing_address" placeholder="Nom de l’entité • Adresse • Code postal • Ville • SIRET (si pro)"></textarea>
+        </div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const gameType = document.getElementById("gameType");
-        const animator = document.getElementById("animator");
-        const distanceField = document.getElementById("distanceField");
-        const distance = document.getElementById("distance");
-        const costumeBox = document.getElementById("costumeBox");
-        const playerExtension = document.getElementById("playerExtension");
-        const totalPrice = document.getElementById("totalPrice");
-        const calculateButton = document.getElementById("calculateButton");
+        <!-- Message -->
+        <div class="grid-2">
+          <label for="parleznous">Parlez-nous de votre projet *</label>
+          <textarea id="parleznous" name="parleznous" placeholder="Objectif de la soirée, ambiance souhaitée, contraintes techniques, budget indicatif…" required></textarea>
+        </div>
 
-        calculateButton.addEventListener("click", function() {
-            let total = parseFloat(gameType.value) + parseFloat(animator.value);
+        <!-- Actions -->
+        <div class="grid-2 actions">
+          <button type="submit" class="btn">Envoyer la demande de devis</button>
+          <a class="btn btn-outline" href="https://kill-event.com/collections/all" target="_blank" rel="noopener">Voir les scénarios</a>
+          <a class="btn btn-outline" href="https://killevent.github.io/calculateurprix/" target="_blank" rel="noopener">Calculateur de prix</a>
+        </div>
 
-            if (animator.value === "250") {
-                total += parseFloat(distance.value) * 1;
-            }
+        <div class="grid-2 legal">
+          TVA non applicable, article 293B du CGI
+        </div>
+      </div>
+    </form>
+  </div>
 
-            if (costumeBox.checked) {
-                total += parseFloat(costumeBox.value);
-            }
-
-            if (playerExtension.checked) {
-                total += parseFloat(playerExtension.value);
-            }
-
-            totalPrice.textContent = total.toFixed(2) + "€";
-        });
+  <script>
+    // Afficher le contenu des bulles d’aide (si on clique le badge ?)
+    document.addEventListener("click", (e)=>{
+      const el = e.target.closest(".help-badge");
+      if(!el) return;
+      const msg = el.getAttribute("title");
+      if(msg) alert(msg);
     });
-    document.addEventListener("DOMContentLoaded", function() {
-    // ... autres scripts ...
-
-    const tooltips = document.querySelectorAll("abbr");
-    tooltips.forEach(function(tooltip) {
-        tooltip.addEventListener("click", function() {
-            alert(tooltip.getAttribute("title"));
-        });
-    });
-});
-</script>
-    <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // ... autres scripts ...
-
-        const participantCount = document.getElementById("participantCount");
-        const totalPrice = document.getElementById("totalPrice");
-        const calculateButton = document.getElementById("calculateButton");
-
-        calculateButton.addEventListener("click", function() {
-            let nbParticipants = parseInt(participantCount.value);
-            let total = 0;
-
-            if (nbParticipants >= 10 && nbParticipants <= 20) {
-                total = 39.90 * nbParticipants;
-            } else if (nbParticipants > 20 && nbParticipants <= 30) {
-                total = 24.90 * nbParticipants;
-            } else if (nbParticipants > 30 && nbParticipants <= 40) {
-                total = 19.90 * nbParticipants;
-            } else if (nbParticipants > 40 && nbParticipants <= 50) {
-                total = 14.90 * nbParticipants;
-            }
-
-            total -= 189.90;
-
-            totalPrice.textContent = total.toFixed(2) + "€";
-        });
-    });
-</script>
-
+  </script>
 </body>
 </html>
+
+
